@@ -2,10 +2,10 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài 2: Đọc danh sách tiêu đề sách</title>
+    <title>Bài 5: Lấy thuộc tính category của sách</title>
 </head>
 <body>
-    <h2>Danh sách tiêu đề sách từ books.xml</h2>
+    <h2>Danh sách category của từng cuốn sách</h2>
     <div id="output"></div>
 
     <script>
@@ -20,12 +20,14 @@
 
         function myFunction(xml) {
             var xmlDoc = xml.responseXML;
-            var titles = xmlDoc.getElementsByTagName("title");
+            var books = xmlDoc.getElementsByTagName("book");
             var txt = "";
-            for (var i = 0; i < titles.length; i++) {
-                txt += titles[i].childNodes[0].nodeValue + "<br>";
+            for (var i = 0; i < books.length; i++) {
+                var title = books[i].getElementsByTagName("title")[0].textContent;
+                var category = books[i].getAttribute("category");
+                txt += "Sách: " + title + " - Thuộc tính category: " + category + "<br>";
             }
-            document.getElementById("output").innerHTML = "Danh sách tiêu đề sách:<br>" + txt;
+            document.getElementById("output").innerHTML = txt;
         }
     </script>
 </body>
